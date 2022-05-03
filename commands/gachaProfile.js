@@ -1,13 +1,6 @@
-const {MongoClient} = require("mongodb")
-const uri = "mongodb+srv://Zero:7yGPYph1U7ZJOBLW@cluster0.rft44.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 const {
     MessageEmbed,
     MessageActionRow,
-    Interaction,
-    Message,
-    MessageButton,
-    InteractionCollector,
-    ButtonInteraction,
     MessageSelectMenu
 } = require("discord.js");
 const waifuNumber = []
@@ -57,9 +50,9 @@ module.exports = {
 
     category: 'Gacha', description: 'Send the banner to the channel', slash: 'both', testOnly: false,
 
-    callback: async ({user, message, interaction, channel, client}) => {
+    callback: async ({user, message, interaction}) => {
         if (waifuNumber[0] === undefined){
-            const waifuList = await require("../helpers/Utility/getArrayAdmin").getArray();
+            const waifuList = await require("../helpers/Utility/Admin/getArrayAdmin").getArray();
             for (i = 0; i < 7; ++i){
                 let tempArray = await filterArray(i,waifuList)
                 waifuNumber.push(tempArray.length)
@@ -69,8 +62,8 @@ module.exports = {
 
         }
         let tiradas = await require("../helpers/ProfileHelper/getTiradas").getTiradas(user.id)
-        const piti = await require("../helpers/Utility/getPiti").getPiti(user.id)
-        if (tiradas == -1) {
+        let piti = await require("../helpers/Utility/getPiti").getPiti(user.id)
+        if (tiradas === -1) {
             await message.reply({
                 ephemeral: true, content: "Aun no estas registrado"
             })
@@ -119,6 +112,9 @@ module.exports = {
             collector.on('collect', async interaction => {
                 if (interaction.values) {
                     if (interaction.values[0] === 'third_option') {
+                        tiradas = await require("../helpers/ProfileHelper/getTiradas").getTiradas(user.id);
+                        piti = await require("../helpers/Utility/getPiti").getPiti(user.id)
+                        embedProfileUser.setDescription('Tiradas restantes : ' + tiradas +"\nPiti: "+ piti)
                         reply.edit({
                             embeds: [embedProfileUser], components: [rowProfileUser]
                         })
@@ -127,7 +123,6 @@ module.exports = {
                 }
                 await require('../helpers/ProfileHelper/bannerList').bannerList(id, interaction, reply)
                 await require('../helpers/ProfileHelper/myList').userList(user, interaction, reply, embedProfileUser,waifuNumber)
-                tiradas = await require("../helpers/ProfileHelper/getTiradas").getTiradas(user.id);
             })
         }
     }

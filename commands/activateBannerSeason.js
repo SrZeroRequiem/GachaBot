@@ -1,9 +1,7 @@
-const {ButtonInteraction, MessageActionRow, MessageButton, MessageEmbed} = require("discord.js");
-
 function starsToNumber(stars) {
     if (stars === "💫💫💫💫💫💫") {
         return 6;
-    } else if (stars === "💫💫💫💫💫💫💫"|| stars == "🌸🌸🌸🌸🌸🌸🌸") {
+    } else if (stars === "💫💫💫💫💫💫💫"|| stars === "🌸🌸🌸🌸🌸🌸🌸") {
         return 7;
     }else if (stars === "🌟🌟🌟🌟🌟") {
         return 5;
@@ -23,17 +21,18 @@ module.exports = {
     ownerOnly: true,
     slash: false,
     testOnly: false,
-    callback: async ({interaction: msgInt, channel, message, client}) => {
+    callback: async ({channel, message, client,guild}) => {
         const init = message.content.lastIndexOf("!activateBannerSeason")+("!activateBannerSeason").length+4
         const subChannel = message.content.substr(init)
         const channelLenght = subChannel.length-1
         const channelsSended = subChannel.substr(0,channelLenght)
-        const collector = channel.createMessageComponentCollector()
         const channelTirada = client.channels.cache.get(channelsSended);
+        require("../helpers/Utility/Update&Upload/channelSeasonUploader").channelUploader(channel,channelTirada,guild.id)
         message.delete()
+        const collector = channel.createMessageComponentCollector()
         collector.on('collect', async i => {
                 const tiradas = await require("../helpers/ProfileHelper/getTiradas").getTiradas(i.user.id);
-                if (i.customId === 'wis' && tiradas >= 1 && tiradas != -1) {
+                if (i.customId === 'wis' && tiradas >= 1 && tiradas !== -1) {
                     const embedWaifu = await require("../helpers/WishHelpers/Season/getRollSeason").getRoll(i.user,i.user.id)
                     let lastindex = (embedWaifu.description).indexOf("\n")
                     let stars = starsToNumber((embedWaifu.description).substring(0, lastindex))
@@ -45,7 +44,7 @@ module.exports = {
                         embeds: [embedWaifu]
                     });
                     await i.deferUpdate();
-                } else if (i.customId === 'wis_ten' && tiradas >= 5 && tiradas != -1) {
+                } else if (i.customId === 'wis_ten' && tiradas >= 5 && tiradas !== -1) {
                     let user = i.user
                     let id = i.user.id
                     await i.deferUpdate();
@@ -61,24 +60,24 @@ module.exports = {
                             embeds: [embedWaifu]
                         });
                     }
-                } else if (i.customId === 'register' && tiradas == -1) {
+                } else if (i.customId === 'register' && tiradas === -1) {
                     let id = i.user.id
                     require("../helpers/WishHelpers/addToUser").addUser(id, "Pagina de inicio", i.user.avatar_url, "", 6);
                     i.reply({
                         ephemeral: true,
                         content: "Has sido registrado",
                     })
-                } else if (i.customId === 'register' && tiradas != -1){
+                } else if (i.customId === 'register' && tiradas !== -1){
                     i.reply({
                         ephemeral:true,
                         content:"Ya estas registrado"
                     })
-                }else if ((i.customId == 'wis'||i.customId == 'wis_ten')&&(tiradas < 5&& tiradas !=-1)) {
+                }else if ((i.customId === 'wis'||i.customId === 'wis_ten')&&(tiradas < 5&& tiradas !==-1)) {
                     i.reply({
                         ephemeral:true,
                         content: "No "
                     })
-                } else {return}
+                } else {}
 
             }
         )

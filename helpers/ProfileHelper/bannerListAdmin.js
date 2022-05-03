@@ -108,7 +108,7 @@ async function filterArray(stars, array) {
 
 async function bannerList(id, interaction, reply) {
     if (embedBanner.length === 0) {
-        const waifuList = await require("../Utility/getArrayAdmin").getArray();
+        const waifuList = await require("../Utility/Admin/getArrayAdmin").getArray();
         for (let a = 0; a < waifuList.length; ++a) {
             let footer;
 

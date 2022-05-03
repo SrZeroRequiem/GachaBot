@@ -3,15 +3,15 @@ const uri = "mongodb+srv://Zero:UIyJVkUJk4E7hozM@cluster0.rft44.mongodb.net/user
 async function getArray() {
     const client = new MongoClient(uri);
     let array
-    let tiradas;
+    let channels;
     try {
         await client.connect()
         const database = client.db('userDb')
-        const usersdb = database.collection('waifudbs')
-        tiradas = await usersdb.find({
-            id : id,
-            lastGift
+        const usersdb = database.collection('channeldbs')
+        channels = await usersdb.find({
+            BannerChannel: {$ne: 0 }
         })
+        array = await channels.toArray()
     }finally {
         client.close()
     }
@@ -19,7 +19,7 @@ async function getArray() {
 
 }
 module.exports = {
-    getArray: () => {
+    getChannel: () => {
         return getArray()
     }
 }

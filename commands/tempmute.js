@@ -1,4 +1,3 @@
-const {User} = require("discord.js");
 const punishmentSchema = require('../schemas/punishment-schema')
 module.exports = {
     category: 'Moderation',

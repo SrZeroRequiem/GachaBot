@@ -1,6 +1,6 @@
-const mongo = require('../mongo')
-const waifuList = require("../db/dbWaifusHusbandos.json");
-const waifuSchema = require('../schemas/waifu-schema')
+const mongo = require('../../../mongo')
+const waifuList = require("../../../files/toUpload/dbWaifusHusbandos.json");
+const waifuSchema = require('../../../schemas/waifu-schema')
 const connectToMongoDB = async () => {
     await mongo().then(async (mongoose) => {
         try {

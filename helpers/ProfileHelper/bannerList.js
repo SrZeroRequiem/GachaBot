@@ -39,13 +39,13 @@ const rowProfileUser = new MessageActionRow()
 function starsToNumber(starsE) {
     let lastindex = starsE.indexOf("\n");
     let stars = starsE.substring(0, lastindex)
-    if (stars == "🌟🌟🌟🌟🌟") {
+    if (stars === "🌟🌟🌟🌟🌟") {
         return 5;
-    } else if (stars == "⭐⭐⭐⭐") {
+    } else if (stars === "⭐⭐⭐⭐") {
         return 4;
-    } else if (stars == "⭐⭐⭐") {
+    } else if (stars === "⭐⭐⭐") {
         return 3;
-    } else if (stars == "¿⭐?") {
+    } else if (stars === "¿⭐?") {
         return 0;
     } else {
 
@@ -96,15 +96,15 @@ async function bannerList(id, interaction, reply) {
         for (let a = 0; a < waifuList.length; ++a) {
             let footer;
 
-            if (waifuList[a].stars == 5) {
+            if (waifuList[a].stars === 5) {
                 footer = "🌟🌟🌟🌟🌟"
-            } else if (waifuList[a].stars == 4) {
+            } else if (waifuList[a].stars === 4) {
                 footer = "⭐⭐⭐⭐"
-            } else if (waifuList[a].stars == 3) {
+            } else if (waifuList[a].stars === 3) {
                 footer = "⭐⭐⭐"
-            } else if (waifuList[a].stars == 6) {
+            } else if (waifuList[a].stars === 6) {
                 footer = "💫💫💫💫💫💫"
-            } else if (waifuList[a].stars == 7 ||waifuList[a].stars == 8) {
+            } else if (waifuList[a].stars === 7 ||waifuList[a].stars === 8) {
                 footer = "💫💫💫💫💫💫💫"
             } else {
                 footer = "¿⭐?"
@@ -152,13 +152,13 @@ async function bannerList(id, interaction, reply) {
     } else if (interaction.customId === 'next_pj' && pagesBanner[id] < tempUserArray.length - 1) {
         ++pagesBanner[id]
     }
-    if (interaction.customId == 'prev_pj' || interaction.customId == 'next_pj') {
+    if (interaction.customId === 'prev_pj' || interaction.customId === 'next_pj') {
         reply.edit({
             embeds: [tempUserArray[pagesBanner[id]]], components: [getRowBanner(id, tempUserArray), rowProfileUser]
         })
         await interaction.deferUpdate()
     } else {
-        return;
+
     }
 }
 

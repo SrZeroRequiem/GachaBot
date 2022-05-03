@@ -14,8 +14,16 @@ const  client = new Discord.Client({
 });
 
 client.on("ready", async() => {
+    const channels = await require("./helpers/Utility/Downloader/channelGet.js").getChannel()
     console.log("Estoy listo!");
-
+    for (let i = 0; i<channels.length;++i){
+    let channelTiradas = client.channels.cache.get(channels[i].TiradasChannel);
+    let channelBanner = client.channels.cache.get(channels[i].BannerChannel);
+    let channelTiradasSeason = client.channels.cache.get(channels[i].TiradasSeasonChannel);
+    let channelBannerSeason = client.channels.cache.get(channels[i].BannerSeasonChannel);
+    require("./helpers/Utility/Activators/Activator.js").activator(channelTiradas,channelBanner)
+    require("./helpers/Utility/Activators/SeasonActivator.js").activatorSeason(channelTiradasSeason,channelBannerSeason)
+    }
     new WOKCommands(client, {
 commandsDir: path.join(__dirname, 'commands'),
         typeScript : false,

@@ -14,7 +14,6 @@ async function getArray() {
                     "Kaguya-sama wa Kokurasetai"]},
         },{sort : {anime : 1, stars : 1},projection : {_id: 0, nameWaifu:1,linkWaifu:1,anime:1,stars:1}})
         array = await tiradas.toArray()
-        console.log(array)
     }finally {
         client.close()
     }
