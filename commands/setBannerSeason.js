@@ -28,9 +28,9 @@ module.exports = {
                 .setLabel('Tirada x 5')
                 .setStyle('PRIMARY'))
         const embedDatos = new MessageEmbed()
-            .setTitle("Banner Permanente")
+            .setTitle("Banner Mayo 2022")
             .setColor(0x00FFFF)
-            .setImage('https://wallpaperaccess.com/full/6694591.jpg');
+            .setImage('https://i.imgur.com/ez3uwvo.png');
         try{
         await channelBanner.send({
             embeds: [embedDatos], components: [rows]
