@@ -2,7 +2,7 @@ const {MessageEmbed} = require("discord.js");
 
 async function getRoll(username,id) {
     const waifuList = await require("./getArraySeason").getArray();
-    let index = await require("./getIndexSeason").getIndex(username, id);
+    let index = await require("./getIndexSeason").getIndex(id);
     let footer;
 
     if (waifuList[index].stars == 5) {

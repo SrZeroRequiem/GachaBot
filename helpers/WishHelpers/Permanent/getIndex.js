@@ -17,7 +17,7 @@ const randomIndex = (distribution) => {
 };
 const createWeights = (array,piti) => {
     const weights = [];
-    if (piti === 50){
+    if (Number(piti) >= 50){
         for (let i = 0; i < array.length; ++i) {
             let prob
             switch (array[i].stars) {

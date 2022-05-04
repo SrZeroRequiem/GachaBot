@@ -35,4 +35,4 @@ commandsDir: path.join(__dirname, 'commands'),
     })
         .setBotOwner(['523650886761709620',"303153220522344448","292332554852237312","927521263210098738"])
 })
-client.login("OTU5NjEzNDE2NDU1MTY4MDIw.G3Tb58.afYbhuWg8Bq1jS6eOkW5r2jcir9t9UFNousiIs");
+client.login("OTU1ODU5Mjc0MjQyODY3MjIy.YjnzUQ.liNkq4anqx4zDuQL1l8tLzokN24");
