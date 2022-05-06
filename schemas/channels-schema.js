@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const db = process.env.MONGO_DB
 const channelSchema = mongoose.Schema({
     Server: String,
     BannerSeasonChannel: Object,
@@ -6,4 +7,4 @@ const channelSchema = mongoose.Schema({
     TiradasSeasonChannel: Object,
     TiradasChannel: Object,
 })
-module.exports = mongoose.model('channeldb', channelSchema)
+module.exports = mongoose.model(db, channelSchema)

@@ -4,7 +4,7 @@ const {Intents} = Discord
 const WOKCommands = require('wokcommands');
 const mongoose = require('mongoose')
 require('dotenv').config()
-
+const login = process.env.DISCORD_TOKEN
 
 const  client = new Discord.Client({
     intents:[
@@ -35,4 +35,4 @@ commandsDir: path.join(__dirname, 'commands'),
     })
         .setBotOwner(['523650886761709620',"303153220522344448","292332554852237312","927521263210098738"])
 })
-client.login("OTU1ODU5Mjc0MjQyODY3MjIy.YjnzUQ.liNkq4anqx4zDuQL1l8tLzokN24");
+client.login(login);

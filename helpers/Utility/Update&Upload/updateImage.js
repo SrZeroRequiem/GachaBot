@@ -2,10 +2,10 @@ const mongo = require('../../../mongo')
 const userSchema = require('../../../schemas/user-schema')
 const waifuSchema = require('../../../schemas/waifu-schema')
 const connectToMongoDB = async () => {
-    const linkWaifu = "https://cdn.donmai.us/sample/e8/18/__kiss_shot_acerola_orion_heart_under_blade_monogatari_and_1_more_drawn_by_hxxg__sample-e818aaee9a33fbbc69c96800f5976576.jpg"
+    const linkWaifu = "https://i.imgur.com/TzQdqfR.png"
     const stars = 5
     console.log(linkWaifu)
-    const nameWaifu = "Kiss-shot Acerola-Orion Heart-Under-Blade"
+    const nameWaifu = "Theoto Rikka"
     await mongo().then(async (mongoose) => {
         try {
             await userSchema.updateMany({tiradasRestantes: {$gte: 0}}, {
